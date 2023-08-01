@@ -49,7 +49,7 @@ const data = computed(() => {
           v-for="(cell, idx) in row"
           :key="'cell-' + idx + 1"
         >
-          {{ cell }}
+          <input type="text" readonly :value="cell" class="bg-transparent outline-none" />
         </td>
       </tr>
     </tbody>

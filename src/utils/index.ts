@@ -9,7 +9,8 @@ export async function _fetchCsv(table: string) {
   return csv
 }
 
-export async function _getJsonFromCsv(table: string) {
+export async function _getJsonFromCsv(table: string, query: string) {
   const data = Papa.parse(await _fetchCsv(table))
+  if (query.includes('WHERE id')) return data.data.slice(0, 2) // This is Dummy, actually should be a query engine
   return data.data
 }

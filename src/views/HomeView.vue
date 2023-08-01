@@ -5,16 +5,16 @@ import ExplorerView from '@/components/ExplorerView.vue'
 </script>
 
 <template>
-  <main>
-    <div class="flex h-screen">
-      <div class="min-w-[250px] h-full">
+  <main class="h-screen mx-auto">
+    <div class="grid grid-cols-12">
+      <div class="col-span-2">
         <ExplorerView />
       </div>
-      <div class="h-full w-full flex flex-col relative">
-        <div class="h-1/4">
+      <div class="col-span-10 flex flex-col">
+        <div class="h-[250px]">
           <EditorView />
         </div>
-        <div class="px-10 py-5 overflow-auto">
+        <div class="overflow-auto p-5">
           <ResultsView />
         </div>
       </div>
