@@ -6,7 +6,7 @@ import ExplorerView from '@/components/ExplorerView.vue'
 
 <template>
   <main class="h-screen mx-auto">
-    <div class="grid grid-cols-12">
+    <div class="grid grid-cols-12 h-full">
       <div class="col-span-2">
         <ExplorerView />
       </div>
