@@ -9,7 +9,10 @@ npm run dev
 ## Project Overview
 On this app, there are few data sets already available, you can choose -> type or select some pre-defined queries & run to get the results out in the bottom.
 
-https://github.com/saikathalderr/vue-sql-editor/assets/29329128/332c01d5-a798-4bcb-8c50-8c4b449531b3
+
+https://github.com/saikathalderr/vue-sql-editor/assets/29329128/5fb34408-d0e3-419e-b0e2-048b2743d556
+
+
 
 ## Tech
 
