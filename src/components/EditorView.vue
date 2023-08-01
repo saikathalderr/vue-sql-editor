@@ -10,12 +10,12 @@ const { currentTable } = storeToRefs(dbStore)
 const prePopulatedQuery = computed(() => {
   return `SELECT * FROM ${currentTable.value}`.trim()
 })
-const editorRef = ref(prePopulatedQuery.value)
+const editorRef = ref('')
 
 watch(
   () => currentTable.value,
   () => {
-    editorRef.value = prePopulatedQuery.value
+    if (currentTable.value.length) editorRef.value = prePopulatedQuery.value
   }
 )
 </script>
