@@ -40,14 +40,16 @@ const tooltipLabel = computed(() => {
 </script>
 
 <template>
-  <ul class="menu bg-base-200 rounded-box absolute z-10 shadow-lg top-28 -left-[30px]">
+  <ul class="menu bg-base-200 rounded-box absolute z-10 shadow-lg top-28 -left-[20px]">
     <div class="tooltip" :data-tip="tooltipLabel">
       <li>
-        <button @click="handleQueryExecution" class="btn btn-sm relative" :disabled="isDisabled">
+        <button
+          @click="handleQueryExecution"
+          class="btn btn-sm relative w-7 h-7"
+          :disabled="isDisabled"
+        >
           <PlayIcon
-            :class="
-              isDisabled ? 'h-full w-full text-neutral opacity-50' : 'h-full w-full text-red-500'
-            "
+            :class="isDisabled ? 'h-3 w-3 text-neutral opacity-50' : 'h-3 w-3 text-red-500'"
           />
           <span
             v-if="isDifferentQuery"
