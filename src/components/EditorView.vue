@@ -1,23 +1,34 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { computed, ref, watch } from 'vue'
+import ActionMenu from '@/components/ActionMenu.vue'
+import { useDbStore } from '@/stores/db'
+import { storeToRefs } from 'pinia'
 
-const currentTable = computed(() => {
-  const tableKey = (router?.currentRoute?.value?.query?.table as string) || ''
-  return tableKey
-})
+const dbStore = useDbStore()
+const { currentTable } = storeToRefs(dbStore)
+
 const prePopulatedQuery = computed(() => {
   return `SELECT * FROM ${currentTable.value}`.trim()
 })
+const editorRef = ref(prePopulatedQuery.value)
+
+watch(
+  () => currentTable.value,
+  () => {
+    editorRef.value = prePopulatedQuery.value
+  }
+)
 </script>
 
 <template>
-  <div class="mockup-code h-full rounded-none">
-    <textarea
-      class="px-20 textarea bg-transparent w-full h-full focus:bg-transparent rounded-none text-white"
-      placeholder="Enter your query here..."
-      :value="prePopulatedQuery"
-    ></textarea>
+  <div class="h-full">
+    <ActionMenu />
+    <div class="mockup-code h-full rounded-none">
+      <textarea
+        class="px-20 textarea bg-transparent w-full h-full focus:bg-transparent rounded-none text-white"
+        placeholder="Enter your query here..."
+        v-model="editorRef"
+      ></textarea>
+    </div>
   </div>
 </template>

@@ -1,24 +1,34 @@
 <script setup lang="ts">
 import { CircleStackIcon, DocumentIcon } from '@heroicons/vue/24/solid'
 import type { ITable } from '@/types'
-import { tables } from '@/db/tables'
+import { tables } from '@/tables'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { useDbStore } from '@/stores/db'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
 const router = useRouter()
 
+const dbStore = useDbStore()
+const { setCurrentTable } = dbStore
+const { currentTable } = storeToRefs(dbStore)
+
+onMounted(() => {
+  if (!currentTable.value) {
+    const tableKey = (router?.currentRoute?.value?.query?.table as string) || ''
+    setCurrentTable(tableKey)
+  }
+})
+
 const onTableClick = (table: ITable) => {
+  const tableKey = table.key
+  setCurrentTable(tableKey)
   router.push({
     query: {
-      table: table.key
+      table: tableKey
     }
   })
 }
-
-const currentTable = computed(() => {
-  const tableKey = (router?.currentRoute?.value?.query?.table as string) || ''
-  return tables.find((table) => table.key === tableKey)
-})
 </script>
 
 <template>
@@ -37,7 +47,7 @@ const currentTable = computed(() => {
           >
             <span
               :class="{
-                active: currentTable?.key === table.key
+                active: currentTable === table.key
               }"
             >
               <DocumentIcon class="h-4 w-4" />
